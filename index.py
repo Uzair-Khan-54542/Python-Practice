@@ -4,24 +4,30 @@ import numpy as np
 
 
 
-data = pd.DataFrame({
-    'Category': ['A', 'B', 'A', 'B', 'A', 'B', 'A', 'B'],
-    'Store': ['s1', 's1', 's2', 's2', 's1', 's2', 's2', 's1'],
-    'Sales': [100, 200, 150, 250, 120, 180, 200, 300],
-    'Quantity': [10, 15, 12, 18, 8, 20, 15, 25],
-    'Date': pd.date_range('2023-01-01', periods = 8)
+df = pd.DataFrame({
+    'Date': pd.date_range('2023-01-01', periods = 20),
+    'Product': ['A', 'B', 'C', 'D'] * 5,
+    'Region': ['East', 'West', 'North', 'South'] * 5,
+    'Sales': np.random.randint(100, 1000, 20),
+    'Units': np.random.randint(10, 100, 20),
+    'Recp': ['John', 'Mary', 'Bob', 'Alice'] * 5
 })
 
+df['Month'] = df['Date'].dt.month_name()
+df['Quarter'] = 'Q' + df['Date'].dt.quarter.astype(str)
 
-print(f'\n{data}\n\n')
+print(f'\n\n{df}\n\n')
 
-# cat = data.groupby(['Category', 'Store'])[['Sales', 'Quantity']].mean()
-# print(f'\n{cat}\n\n')
+pivot_1 = df.pivot_table(values = ['Sales', 'Units'], index = 'Region', columns = 'Product', aggfunc = 'median')
+pivot_2 = df.pivot_table(values = ['Sales', 'Units'], index = 'Region', columns = 'Product', aggfunc = 'mean')
 
-# Aggregation Function
+print(f'\n\nPivot Table # 1\n\n{pivot_1}\n\n')
+print(f'\n\nPivot Table # 2\n\n{pivot_2}\n\n')
 
 
-print(data['Sales'].agg(['mean', 'median', 'count', 'min', 'max', 'std', 'sum']))
+print(pd.crosstab(df['Region'], df['Product']))
+
+
 
 
 
