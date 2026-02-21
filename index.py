@@ -4,54 +4,24 @@ import numpy as np
 
 
 
-df = pd.DataFrame({
-    'names': ['Khan', 'Junejo', 'Kalia', np.nan, 'Gullu', 'Mona', 'Kashi'],
-    'ages': [22, 20, 21, np.nan, 24, np.nan, 30],
-    'cities': [np.nan, 'Lahore', 'Mansehra', 'Kiranchi', np.nan, 'Sialkot', np.nan]
+data = pd.DataFrame({
+    'Category': ['A', 'B', 'A', 'B', 'A', 'B', 'A', 'B'],
+    'Store': ['s1', 's1', 's2', 's2', 's1', 's2', 's2', 's1'],
+    'Sales': [100, 200, 150, 250, 120, 180, 200, 300],
+    'Quantity': [10, 15, 12, 18, 8, 20, 15, 25],
+    'Date': pd.date_range('2023-01-01', periods = 8)
 })
 
-# print(df, '\n')
 
-# print(df.isna().sum(), '\n')
+print(f'\n{data}\n\n')
 
-# print(df.fillna('(empty)'))
+# cat = data.groupby(['Category', 'Store'])[['Sales', 'Quantity']].mean()
+# print(f'\n{cat}\n\n')
 
-# print(df.dropna(thresh = 3))
-
-# values = [df['names'].mode(), df['ages'].mean(), df['cities'].mode()]
-# df.fillna(value = values)
-
-# print(df, '\n')
+# Aggregation Function
 
 
-
-
-# celebrities = pd.DataFrame({
-#     'celebrity_id': [1, 2, 3, 4, 5],
-#     'name': ['Kashi', 'Mana', 'Kalia', 'Billa', 'Jeda'],
-#     'city': ['Mansehra', 'Peshawar', 'Karachi', 'Multan', 'Lahore']
-# })
-
-# net_worth = pd.DataFrame({
-#     'celebrity_id': [1, 2, 3, 8, 5],
-#     'networth': [20000000, 45000000, 1800000, 9000000000, 990000000000],
-# })
-
-# print(celebrities, '\n\n', net_worth, '\n')
-
-# print(pd.merge(celebrities, net_worth, on = 'celebrity_id', how = 'outer'))
-# print(pd.concat([celebrities, net_worth]))
-
-# col_1 = pd.DataFrame({
-#     'age': [12, 15, 14, 12, 11, 13]
-# }, index = [0, 1, 2, 3, 4, 5])
-
-# col_2 = pd.DataFrame({
-#     'salary': [15000000, 20000000, 160000000, 158000000, 100000000, 2500000000]
-# }, index = [3, 4, 5, 6, 7, 8])
-
-
-# print(col_1.join(col_2))
+print(data['Sales'].agg(['mean', 'median', 'count', 'min', 'max', 'std', 'sum']))
 
 
 
