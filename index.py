@@ -62,9 +62,18 @@ data['Duration(Months)'] = data['Total Time'].apply(extract_duration)
 
 
 
+# print(data[data['Score'] == data['Score'].max()])
+
+sorted_data = data.sort_values(by = 'Duration(Months)', ascending = False)
+
+print(sorted_data.head(5), '\n')
 
 
+
+
+
+# print(sorted_data, '\n')
 # print(data.loc[0]['Title'])
-print(data.head(), '\n')
+# print(data.head(), '\n')
 # print(data['Duration'].dtype, '\n')
 # print(data, '\n')
